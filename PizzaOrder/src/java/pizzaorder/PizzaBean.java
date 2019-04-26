@@ -196,10 +196,11 @@ public class PizzaBean implements Serializable {
         }
 
         try {
-            // create a PreaparedStatement to insert a new address book entry
+            // create a PreaparedStatement to select orders by ordertime descending
             PreparedStatement getOrders = connection.prepareStatement(
             "SELECT * FROM APP.ORDERS ORDER BY ORDERTIME DESC");
-
+            
+            // populates table with retrieved data
             CachedRowSet rowSet =
                 RowSetProvider.newFactory().createCachedRowSet();
             rowSet.populate(getOrders.executeQuery());
