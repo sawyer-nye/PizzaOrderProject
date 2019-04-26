@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:head>
+        <title>Place Order</title>
+        <h:outputStylesheet name="style.css" library="css"/>
+    </h:head>
+    <h:body>
+        <h1>Register and Submit Your Order</h1>     
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputText value="First Name:"/>
+                <h:inputText id="firstNameInputText" required="true"
+                             requiredMessage="Please enter first name"
+                             value="#{pizzaBean.firstName}"
+                             validatorMessage="First name must be fewer than 20 characters">
+                    <f:validateLength maximum="20"/>
+                </h:inputText>
+                <h:message for="firstNameInputText" styleClass="error"/>
+                
+                <h:outputText value="Last Name:"/>
+                <h:inputText id="lastNameInputText" required="true"
+                             requiredMessage="Please enter last name"
+                             value="#{pizzaBean.lastName}"
+                             validatorMessage="Last name must be fewer than 20 characters">
+                    <f:validateLength maximum="20"/>
+                </h:inputText>
+                <h:message for="lastNameInputText" styleClass="error"/>
+                
+                <h:outputText value="Phone Number:"/>
+                <h:inputText id="phoneInputText" required="true"
+                             requiredMessage="Please enter phone number"
+                             value="#{pizzaBean.phone}"
+                             validatorMessage="Invalid Phone Number Format">
+                    <f:validateRegex pattern=
+                       "((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" />
+                </h:inputText>
+                <h:message for="phoneInputText" styleClass="error"/>
+                
+                <h:outputText value="Email Address:"/>
+                <h:inputText id="emailInputText" required="false"
+                             value="#{pizzaBean.email}"
+                             validatorMessage="Invalid Email Address Format">
+                    <f:validateRegex pattern=
+                        "(\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)?" />
+                </h:inputText>
+                <h:message for="emailInputText" styleClass="error"/>
+                
+            </h:panelGrid>
+            
+            <h:commandButton value="Place Your Order" action="#{pizzaBean.orderPizza}"
+                style="margin-right:8px;"/>
+            <h:button value="Return to Homepage" outcome="index.xhtml"/>
+        </h:form>
+    </h:body>
+    
+</html>
+

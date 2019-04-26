@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Select Your Sides</title>
+        <h:outputStylesheet name="style.css" library="css"/>
+    </h:head>
+    <h:body>
+        <h1>Select Your Sides</h1>
+        <h:form>
+            <h:selectOneRadio value="#{pizzaBean.sidesId}">
+                <f:selectItem itemValue="1" itemLabel="Cheese Sticks" />
+                <f:selectItem itemValue="2" itemLabel="Buffalo Wings" />
+            </h:selectOneRadio>
+
+            <h:graphicImage name="cheesestick.jpg" library="images"/>
+            <h:graphicImage name="buffalowing.jpg" library="images"/>
+
+            <br />
+            <br />
+            
+            <p>Sides Quantity: <h:inputText value="#{pizzaBean.sidesQn}" /></p>
+            <h:commandButton value="Next step: select your drink"
+                action="selectdrink?faces-redirect=true"/>
+        </h:form>
+        
+         
+    </h:body>
+</html>

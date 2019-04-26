@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Pizza Orders</title>
+        <h:outputStylesheet name="style.css" library="css"/>
+    </h:head>
+    <h:body>
+        <h1>All Past Pizza Orders</h1>
+        <h:outputLink value="index.xhtml">Return to Welcome Page</h:outputLink>
+        
+        <h:dataTable value="#{pizzaBean.orders}" var="orders"
+            rowClasses="oddRows,evenRows" headerClass="header"
+            styleClass="table" cellpadding="5" cellspacing="0">
+            
+            <h:column>
+                <f:facet name="header">Order Id</f:facet>
+                #{orders.ORDERID}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Phone Number</f:facet>
+                #{orders.PHONENUMBER}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Order Time</f:facet>
+                #{orders.ORDERTIME}
+            </h:column>
+            
+            <h:column>
+                <f:facet name="header">Total Price</f:facet>
+                #{orders.TOTALPRICE}
+            </h:column>
+            
+        </h:dataTable>
+    </h:body>
+</html>

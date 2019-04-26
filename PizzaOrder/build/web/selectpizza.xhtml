@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Select Your Pizza</title>
+        <h:outputStylesheet name="style.css" library="css"/>
+    </h:head>
+    <h:body>
+        <h1>Select Your Pizza</h1>
+        <h:form>
+            <h:selectOneRadio value="#{pizzaBean.pizzaId}">
+                <f:selectItem itemValue="1" itemLabel="Pepperoni Pizza"/>
+                <f:selectItem itemValue="2" itemLabel="Sausage Pizza"/>
+                <f:selectItem itemValue="3" itemLabel="Cheese Pizza"/>
+            </h:selectOneRadio>
+
+            <h:graphicImage name="pepperoni.jpg" library="images" height="175px"/>
+            <h:graphicImage name="sausage.jpg" library="images" height="175px"/>
+            <h:graphicImage name="cheese.jpg" library="images" height="175px"/>  
+
+            <br />
+            <br />
+            
+            <p>Pizza Quantity: <h:inputText value="#{pizzaBean.pizzaQn}"/></p>
+            <h:commandButton value="Next step: select your sides"
+                action="selectsides?faces-redirect=true"/>
+        </h:form>
+    </h:body>
+</html>
