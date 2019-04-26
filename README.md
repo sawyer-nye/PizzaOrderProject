@@ -1,2 +1,2 @@
 # PizzaOrderProject
-A JSF/SQL pizza ordering system
+A JSF ManagedBean pizza ordering system with database read/write.
