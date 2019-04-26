@@ -28,20 +28,20 @@ import javax.sql.rowset.RowSetProvider;
 @ManagedBean(name="pizzaBean")
 @SessionScoped
 public class PizzaBean implements Serializable {
-    private String  firstName;
-    private String  lastName;
-    private String  phone;
-    private String  email;
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String email;
     
     // initialize all IDs to first selection, quantities to 0
-    private String  pizzaId = "1";
-    private String  pizzaQn = "0";
-    private String  sidesId = "1";
-    private String  sidesQn = "0";
-    private String  drinkId = "1";
-    private String  drinkQn = "0";
+    private String pizzaId = "1";
+    private String pizzaQn = "0";
+    private String sidesId = "1";
+    private String sidesQn = "0";
+    private String drinkId = "1";
+    private String drinkQn = "0";
     
-    private String  orderId;
+    private String orderId;
     
     
     // allow server to inject the DataSource
