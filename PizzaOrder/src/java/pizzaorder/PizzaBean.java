@@ -33,6 +33,7 @@ public class PizzaBean implements Serializable {
     private String  phone;
     private String  email;
     
+    // initialize all IDs to first selection, quantities to 0
     private String  pizzaId = "1";
     private String  pizzaQn = "0";
     private String  sidesId = "1";
@@ -47,7 +48,8 @@ public class PizzaBean implements Serializable {
     @Resource(lookup="java:global/jdbc/pizzadb")
     DataSource dataSource;
     
-    
+    // Below: getters and setters
+    // Note:  all have type String returns for easy database insertion
     public String getFirstName() {
         return firstName;
     }
@@ -128,6 +130,7 @@ public class PizzaBean implements Serializable {
         this.drinkQn = drinkQn;
     }
     
+    // calculates price of customer's pizza order
     public int getPizzaPrice() {
         int pizzaPrice = 0;
         
@@ -146,6 +149,7 @@ public class PizzaBean implements Serializable {
         return pizzaPrice;
     }
     
+    // calculates price of customer's sides order
     public int getSidesPrice() {
         int sidesPrice = 0;
         
@@ -161,6 +165,7 @@ public class PizzaBean implements Serializable {
         return sidesPrice;
     }
     
+    // calculates price of customer's drink order
     public int getDrinkPrice() {
         int drinkPrice = 0;
         
@@ -181,6 +186,7 @@ public class PizzaBean implements Serializable {
         return Integer.toString(getPizzaPrice() + getSidesPrice() + getDrinkPrice());
     }
     
+    // creates resultset table for orders sorted by descending
     public ResultSet getOrders() throws SQLException {
         // check if dataSource was injected by the server
         if (dataSource == null) {
@@ -196,7 +202,7 @@ public class PizzaBean implements Serializable {
         }
 
         try {
-            // create a PreaparedStatement to select orders by ordertime descending
+            // create a PreparedStatement to select orders by ordertime descending
             PreparedStatement getOrders = connection.prepareStatement(
             "SELECT * FROM APP.ORDERS ORDER BY ORDERTIME DESC");
             
@@ -228,7 +234,7 @@ public class PizzaBean implements Serializable {
         }
         
         try {
-            /*  generates an orderId based on current date
+            /*  Generates an orderId based on current date
                 Note: this doesn't receive its own method so that no conflicting
                       orderId's are created when each query is created below. */
             Date orderDate = new Date();
@@ -254,21 +260,22 @@ public class PizzaBean implements Serializable {
             // Creates query for new entry to ORDEREDITEMS table
             PreparedStatement addOrderedItems =
                 connection.prepareStatement(
-                    "INSERT INTO ORDEREDITEMS (ORDERID, PIZZAID, PIZZAQN, " +
-                    "SIDESID, SIDESQN, DRINKID, DRINKQN)" +
+                    "INSERT INTO ORDEREDITEMS" +
+                    "(ORDERID, PIZZAID, PIZZAQN, SIDESID, SIDESQN, DRINKID, DRINKQN)" +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)");
             
-            addOrderedItems.setString(1, orderId); // sets 1st ? to orderId
+            addOrderedItems.setString(1, orderId);      // sets 1st ? to orderId
             addOrderedItems.setString(2, getPizzaId()); // sets 2nd ? to pizzaId
             addOrderedItems.setString(3, getPizzaQn()); // sets 3rd ? to pizzaQn
-            addOrderedItems.setString(4, getSidesId()); 
+            addOrderedItems.setString(4, getSidesId()); // etc.
             addOrderedItems.setString(5, getSidesQn());
             addOrderedItems.setString(6, getDrinkId());
             addOrderedItems.setString(7, getDrinkQn());
             
             // Creates query for new entry to ORDERS table
             PreparedStatement addOrder =
-                connection.prepareStatement( "INSERT INTO ORDERS" +
+                connection.prepareStatement(
+                    "INSERT INTO ORDERS" +
                     "(ORDERID, PHONENUMBER, ORDERTIME, TOTALPRICE)" +
                     "VALUES (?, ?, ?, ?)");
             
@@ -285,7 +292,7 @@ public class PizzaBean implements Serializable {
             return "index?faces-redirect=true"; // go back to index.xhtml page
         }
         finally {
-            connection.close();         // return this connection to pool
+            connection.close();                 // return this connection to pool
         }
     }
     
